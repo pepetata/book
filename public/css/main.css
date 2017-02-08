@@ -1,0 +1,61 @@
+.ng-invalid.ng-dirty {
+	border-color: #FA787E;
+}
+.ng-valid.ng-dirty {
+	border-color: #78FA89;
+}
+
+.error {
+	color:red;
+}
+.books {
+	display: inline-block;
+	border-style: solid;
+    border: 1px;
+    padding: 4px;
+    margin: 3px;
+}
+.books img{
+    max-height: 200px;
+}
+.tradebooks {
+	display: inline-block;
+	border-style: solid;
+    border: 1px;
+    padding: 2px;
+    margin: 2px;
+}
+.tradereqs {
+	border-style: solid;
+    border: 1px;
+    padding: 2px;
+    margin: 2px;
+}
+.tradebooks img{
+    max-height: 140px;
+}
+.tradereqs img{
+    max-height: 100px;
+    margin-right: 5px;
+}
+.tradereqs div{
+    display: inline;
+}
+#trade img{
+    max-height: 80px;
+}
+.book40body {
+	width: 40%;
+	margin: auto;
+}
+.book80body {
+	width: 80%;
+	margin: auto;
+}
+footer {
+  font-style: italic;
+}
+
+a:hover {
+	cursor: pointer;
+}

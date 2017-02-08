@@ -1,0 +1,33 @@
+extends layout.pug
+
+block content
+
+    div.book40body
+      h1.text-center My Profile
+      div#myProfile
+        form(name="stdForm", novalidate, ng-submit="stdForm.$valid && bCtrl.myProfile(bCtrl.user)" )
+          .form-group
+            label(for="name") Full Name
+            input.form-control(type="text", id="name", name="name", ng-model="bCtrl.user.name",placeholder="Full name")
+          .form-group
+            label(for="city") City
+            input.form-control(type="text", id="city", name="city", ng-model="bCtrl.user.city", placeholder="City")
+          .form-group
+            label(for="state") State
+            input.form-control(type="text", id="state", name="state", ng-model="bCtrl.user.state", placeholder="State")
+          .form-group
+            label(for="password") Password
+            input.form-control(type="password", id="password", name="password", ng-model="bCtrl.user.password", placeholder="Password", required)
+            div.error(ng-show="userForm.$submitted || userForm.password.$touched")
+              span(ng-show="userForm.password.$error.required") Enter a new password
+          .form-group
+            label(for="password2") Re-type Password
+            input.form-control(type="password", id="password2", name="password2",  ng-model="bCtrl.user.password2",placeholder="Same password",required)
+            div.error(ng-show="userForm.$submitted || userForm.password2.$touched")
+              span(ng-show="userForm.password2.$error.required") Re-type your new password
+          div.error.text-center(ng-show="bCtrl.user.error")
+            span {{bCtrl.user.errorMsg}}
+          button.btn.btn-default(type="button", onclick="javascript:location.href ='/';") Cancel
+          button.btn.btn-primary(type="submit") Save
+    
+

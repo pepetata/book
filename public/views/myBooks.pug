@@ -1,0 +1,11 @@
+extends layout.pug
+
+block content
+
+    div.text-center.pollbody
+      h1 My Books
+      div
+        div.books(ng-repeat="book in bCtrl.books  | filter : bCtrl.user.email")
+          img(ng-src="{{book.imagesrc}}")
+    
+

@@ -1,0 +1,31 @@
+extends layout.pug
+
+block content
+    div.book40body
+      h1.text-center New Book
+      div#myProfile
+        form(name="stdForm", enctype="multipart/form-data", novalidate, ng-submit="stdForm.$valid && bCtrl.addBook(bCtrl.book)" )
+          .form-group
+            label(for="title") Title
+            input.form-control(type="text", id="title", name="title", ng-model="bCtrl.book.title",placeholder="Title...")
+          .form-group
+            label(for="author") Author
+            input.form-control(type="text", id="author", name="author", ng-model="bCtrl.book.author", placeholder="Author...")
+          .form-group
+            label(for="image") Imagem
+            input.form-control(type="text", name="image", ng-model="bCtrl.book.image", placeholder="Image from web...")
+            label(for="imagefile") or upload a file
+            input.form-control(type="file", ngf-select ng-model="bCtrl.book.picFile" name="file" ngf-pattern="'image/*'"
+             ngf-accept="'image/*'" ngf-max-size="2MB" ngf-min-height="100" 
+             ngf-resize="{width: 100, height: 100}" ngf-model-invalid="errorFile")
+            i(ng-show="stdForm.file.$error.required") *required
+            i(ng-show="stdForm.file.$error.maxSize") File too large {{errorFile.size / 1000000|number:1}}MB: max 2M
+            br
+            br
+            img.img-responsive(ng-show="stdForm.file.$valid" ngf-thumbnail="bCtrl.book.picFile")
+            img.img-responsive(ng-show="stdForm.file.$valid" ngf-thumbnail="bCtrl.book.image")
+      
+          br
+          button.btn.btn-default(type="button", onclick="javascript:location.href ='/';") Cancel
+          button.btn.btn-primary(type="submit") Save
+    

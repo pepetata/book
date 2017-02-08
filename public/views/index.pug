@@ -1,0 +1,64 @@
+extends layout.pug
+
+block content
+    <!-- trade Modal -->
+    .modal.fade(id="tradeModal",tabindex="-1",role="dialog", aria-labelledby="myModalLabel")
+      .modal-dialog(role="document")
+        .modal-content
+          .modal-header
+            button.close(type="button" ,data-dismiss="modal",aria-label="Close") x
+            h4.modal-title(id="myModalLabel") What book you offer for this book?
+            div#trade
+          .modal-body
+            div.tradebooks(ng-repeat="book in bCtrl.books  | filter : { email: bCtrl.user.email}")
+              a(ng-click="bCtrl.mytradereq(book)")
+                img(ng-src="{{book.imagesrc}}")
+          .modal-footer
+             button.btn.btn-default(type="button", data-dismiss="modal") Cancel
+
+    <!-- mytrades Modal -->
+    .modal.fade(id="mytradereqsModal",tabindex="-1",role="dialog", aria-labelledby="myModalLabel")
+      .modal-dialog.modal-sm(role="document")
+        .modal-content
+          .modal-header
+            button.close(type="button" ,data-dismiss="modal",aria-label="Close") x
+            h4.modal-title(id="myModalLabel") List of my trade requests
+          .modal-body
+            div.tradereqs(ng-repeat="trade in bCtrl.trades  | filter : { mybemail: bCtrl.user.email}")
+              img(ng-src="{{trade.book}}")
+              img(ng-src="{{trade.mybook}}") 
+              div {{trade.status}}
+          .modal-footer
+             button.btn.btn-default(type="button", data-dismiss="modal") Ok
+
+    <!-- mytrades Modal -->
+    .modal.fade(id="trademereqsModal",tabindex="-1",role="dialog", aria-labelledby="myModalLabel")
+      .modal-dialog(role="document")
+        .modal-content
+          .modal-header
+            button.close(type="button" ,data-dismiss="modal",aria-label="Close") x
+            h4.modal-title(id="myModalLabel") List of my trade requests
+          .modal-body.text-center
+            div.tradereqs(ng-repeat="trade in bCtrl.trades  | filter : { bemail: bCtrl.user.email}")
+              img(ng-src="{{trade.book}}")
+              img(ng-src="{{trade.mybook}}") 
+              div(ng-show="trade.status !== 'Sent'") {{trade.status}}
+              div
+                button.btn.btn-danger(ng-show="trade.status === 'Sent'", ng-click="bCtrl.updateTrade(trade,'Not interested')") Not interested
+                button.btn.btn-success(ng-show="trade.status === 'Sent'", ng-click="bCtrl.updateTrade(trade,'Accepted')") Accept
+          .modal-footer
+             button.btn.btn-default(type="button", data-dismiss="modal") Ok
+
+    div.text-center.book40body
+      button#mytradereqsbtn.btn-success(type="button", data-toggle="modal", href="#mytradereqsModal") My trade requests
+      button#tradereqsbtn.btn-info(type="button", data-toggle="modal", href="#trademereqsModal") Trade requests to me
+    div.text-center.book80body
+    
+      h1 List of Books
+      h3 Do you want to trade?
+      div
+        div.books(ng-repeat="book in bCtrl.books")
+          a(ng-click="bCtrl.tradereq(book)")
+            img(ng-src="{{book.imagesrc}}")
+    
+
